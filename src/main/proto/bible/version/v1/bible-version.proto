@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.biblecontentmedia.dailyverse.protos.v1;
+
+option java_multiple_files = true;
+option java_package = "com.biblecontentmedia.dailyverse.api.proto";
+option java_outer_classname = "BibleVersionProto";
+
+enum BibleVersion {
+  UNSPECIFIED = 0;
+  ESV = 1;
+  KJV = 2;
+  NIV = 3;
+  NASB = 4;
+  NLT = 5;
+  AMP = 6;
+  NKJV = 7;
+  ASV = 8;
+  MSG = 9;
+}

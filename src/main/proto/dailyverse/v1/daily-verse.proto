@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package com.biblecontentmedia.dailyverse.protos.v1;
+
+import "google/protobuf/timestamp.proto";
+import "bible/version/v1/bible-version.proto";
+
+option java_multiple_files = true;
+option java_package = "com.biblecontentmedia.dailyverse.protos";
+option java_outer_classname = "DailyVerseProto";
+
+service DailyVerseService {
+  rpc GetDailyVerse (GetDailyVerseRequest) returns (DailyVerseResponse);
+  rpc ListVerses (ListVersesRequest) returns (ListVersesResponse);
+  rpc GetVerseDetail (GetVerseRequest) returns (VerseDetailResponse);
+}
+
+message VerseMetadata {
+  string text = 1;
+  string reference = 2;
+  BibleVersion version = 3;
+  string language = 4;
+}
+
+message VerseSummary {
+  string id = 1;
+  string text = 2;
+  string reference = 3;
+  BibleVersion version = 4;
+}
+
+message Verse {
+  string id = 1;
+  VerseSummary summary = 2;
+  VerseMetadata metadata = 3;
+  google.protobuf.Timestamp created_at = 4;
+  repeated string tags = 5;
+}
+
+message GetDailyVerseRequest {
+  string language = 1;
+  BibleVersion version = 2;
+}
+
+message GetVerseRequest {
+  string id = 1;
+}
+
+message ListVersesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string language = 3;
+}
+
+message DailyVerseResponse {
+  VerseSummary verse = 1;
+}
+
+message VerseDetailResponse {
+  Verse verse = 1;
+}
+
+message ListVersesResponse {
+  repeated VerseSummary verses = 1;
+  string next_page_token = 2;
+}
